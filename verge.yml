@@ -1,0 +1,31 @@
+---
+- hosts: verge_tenants
+  connection: local
+  gather_facts: no
+  become: no
+
+  vars_prompt:
+    - name: verge_api_user
+      prompt: "Verge user (either your exception id or api user)?"
+      private: no
+
+    - name: api_user_password
+      prompt: "Verge user password?"
+
+# Create users
+- name: create admin users in tenant
+  delegate_to: localhost
+  uri:
+    url: 'https://{{ inventory_hostname }}/api/v4/users'
+    user: '{{ api_user_password }}'
+    password: '{{ api_user_password }}'
+    method: POST
+    body: '{"auth_source":"1","name":"{{ item.name }}","remote_name":"{{ item.name }}@example.com","displayname":"{{ item.displayname }}","email":"{{ item.email }}"}'
+    force_basic_auth: yes
+    validate_certs: no
+    status_code: 201
+    body_format: json
+  loop:
+    - { name: 'test', displayname: 'test', email: 'test@example.com'}
+  tags: verge_tenant
+
