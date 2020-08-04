@@ -6,7 +6,7 @@
 
   vars_prompt:
     - name: verge_api_user
-      prompt: "Verge user (either your exception id or api user)?"
+      prompt: "Verge username?"
       private: no
 
     - name: api_user_password
