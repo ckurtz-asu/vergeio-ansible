@@ -2,7 +2,7 @@
 
 Utilizes Ansible's uri module to control the verge.io API.
 
-Instructions:
+## Instructions:
 
 Add your tenant UI FQDNs in the inventory file under the [verge_tenants] option.
 Add users to the "loop" section of verge.yml
