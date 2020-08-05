@@ -23,7 +23,9 @@
     body: '{"auth_source":"1","name":"{{ item.name }}","remote_name":"{{ item.name }}@example.com","displayname":"{{ item.displayname }}","email":"{{ item.email }}"}'
     force_basic_auth: yes
     validate_certs: no
-    status_code: 201
+    status_code:
+      - 200
+      - 422
     body_format: json
   loop:
     - { name: 'test', displayname: 'test', email: 'test@example.com'}
